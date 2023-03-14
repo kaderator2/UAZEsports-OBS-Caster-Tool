@@ -20,6 +20,7 @@ public class Main extends Application {
 			primaryStage.setTitle("UAZ Caster Tool");
 			Image uaIcon = new Image(getClass().getResourceAsStream("/ualogo.png"));
 			primaryStage.getIcons().add(uaIcon);
+			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
