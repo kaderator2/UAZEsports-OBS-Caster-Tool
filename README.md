@@ -4,3 +4,5 @@ WIP JavaFX Based Caster tool for adding and hotswapping caster names from a cust
 
 ![alt text](https://github.com/kaderator2/UAZEsports-OBS-Caster-Tool/blob/master/uazcastertool/resources/drizzlerotatefinal.gif)
 
+![alt text](https://i.imgur.com/yFvSrde.png)
+![alt text](https://i.imgur.com/nstuwxO.png)
