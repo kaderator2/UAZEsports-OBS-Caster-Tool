@@ -1,10 +1,12 @@
 package application;
 	
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 
 public class Main extends Application {
@@ -15,6 +17,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root,640,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("UAZ Caster Tool");
+			Image uaIcon = new Image(Main.class.getResourceAsStream("ualogo.png"));
+			primaryStage.getIcons().add(uaIcon);
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
