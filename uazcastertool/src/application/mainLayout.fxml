@@ -99,7 +99,7 @@
                <children>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <image>
-                        <Image url="@../../../../../Downloads/giphy.png" />
+                        <Image url="@giphy.png" />
                      </image>
                      <effect>
                         <DropShadow blurType="GAUSSIAN" radius="36.379999999999995" width="126.52" />
@@ -131,7 +131,7 @@
                               </Button>
                               <ImageView fitHeight="200.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" scaleX="0.25" scaleY="0.25" translateY="-40.0" StackPane.alignment="TOP_CENTER">
                                  <image>
-                                    <Image url="@../../../../../Downloads/ualogo.png" />
+                                    <Image url="@ualogo.png" />
                                  </image>
                                  <effect>
                                     <DropShadow />
@@ -249,7 +249,7 @@
                                  <children>
                                     <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../../../../Downloads/drizzlerotatefinal.gif" />
+                                          <Image url="@drizzlerotatefinal.gif" />
                                        </image>
                                     </ImageView>
                                  </children></AnchorPane>
