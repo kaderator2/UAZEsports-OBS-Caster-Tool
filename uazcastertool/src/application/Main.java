@@ -13,12 +13,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("mainLayout.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/mainLayout.fxml"));
 			Scene scene = new Scene(root,640,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("UAZ Caster Tool");
-			Image uaIcon = new Image(Main.class.getResourceAsStream("ualogo.png"));
+			Image uaIcon = new Image(getClass().getResourceAsStream("/ualogo.png"));
 			primaryStage.getIcons().add(uaIcon);
 			primaryStage.show();
 		} catch(Exception e) {
