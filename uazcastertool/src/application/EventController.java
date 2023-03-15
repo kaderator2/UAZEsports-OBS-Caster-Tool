@@ -10,5 +10,16 @@ public class EventController {
     @FXML protected void handleSubmitButtonAction(ActionEvent event) {
         actiontarget.setText("Sign in button pressed");
     }
+    
+    @FXML protected void changeActiveCasters(ActionEvent event) {
+    	//TODO Fix me
+        actiontarget.setText("Sign in button pressed");
+    }
+    
+    @FXML protected void addNewCaster(ActionEvent event) {
+    	//TODO Fix me
+        actiontarget.setText("Sign in button pressed");
+    }
+    
 
 }
