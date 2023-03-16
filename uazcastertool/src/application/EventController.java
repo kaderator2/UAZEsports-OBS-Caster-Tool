@@ -13,7 +13,7 @@ public class EventController {
     
     @FXML protected void changeActiveCasters(ActionEvent event) {
     	//TODO Fix me
-        actiontarget.setText("Sign in button pressed");
+        System.out.println("Sign in button pressed");
     }
     
     @FXML protected void addNewCaster(ActionEvent event) {
