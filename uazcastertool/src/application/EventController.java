@@ -1,11 +1,19 @@
 package application;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class EventController {
+	private BufferedWriter writeCasterDB;
 	@FXML
 	private Label errorText;
 	@FXML
@@ -38,11 +46,16 @@ public class EventController {
 			String lastName = lastNameField.getText();
 			String discordUser = discordField.getText();
 			System.out.println(firstName + lastName + discordUser);
+			writeCasterDB = new BufferedWriter(new FileWriter("casterDatabase.csv", true));
+			writeCasterDB.newLine();
+			writeCasterDB.write(firstName + ", " + lastName + ", " + discordUser);
+			writeCasterDB.close();
 			successText.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorText.setVisible(true);
 		}
+
 	}
 
 }
