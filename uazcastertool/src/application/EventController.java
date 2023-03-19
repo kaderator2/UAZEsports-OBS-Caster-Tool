@@ -42,9 +42,13 @@ public class EventController {
 		successText.setVisible(false);
 		errorText.setVisible(false);
 		try {
+			
 			String firstName = firstNameField.getText();
 			String lastName = lastNameField.getText();
 			String discordUser = discordField.getText();
+			if (firstName.contains(",") || lastName.contains(",") || discordUser.contains(",")) {
+				throw new java.io.IOException();
+			}
 			System.out.println(firstName + lastName + discordUser);
 			writeCasterDB = new BufferedWriter(new FileWriter("casterDatabase.csv", true));
 			writeCasterDB.newLine();
