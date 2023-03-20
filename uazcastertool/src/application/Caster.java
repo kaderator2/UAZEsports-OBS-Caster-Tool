@@ -1,41 +1,47 @@
 package application;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Caster {
-	private String lName;
-	private String fName;
-	private String discordName;
+	private SimpleStringProperty lastNameTB;
+	private SimpleStringProperty firstNameTB;
+	private SimpleStringProperty discordTB;
 
-	public Caster(String lName, String fName, String discordName) {
-		this.setlName(lName);
-		this.setfName(fName);
-		this.setDiscordName(discordName);
+	public Caster(String firstNameTB, String lastNameTB, String discordTB) {
+		this.setLastNameTB(lastNameTB);
+		this.setFirstNameTB(firstNameTB);
+		this.setDiscordTB(discordTB);
 	}
 
-	public String getlName() {
-		return lName;
+	public String getLastNameTB() {
+		return lastNameTB.get();
 	}
 
-	public void setlName(String lName) {
-		this.lName = lName;
+	public void setLastNameTB(String lastNameTB) {
+		this.lastNameTB = new SimpleStringProperty(lastNameTB);
 	}
 
-	public String getfName() {
-		return fName;
+	public String getFirstNameTB() {
+		return firstNameTB.get();
 	}
 
-	public void setfName(String fName) {
-		this.fName = fName;
+	public void setFirstNameTB(String firstNameTB) {
+		this.firstNameTB = new SimpleStringProperty(firstNameTB);
 	}
 
-	public String getDiscordName() {
-		return discordName;
+	public String getDiscordTB() {
+		return discordTB.get();
 	}
 
-	public void setDiscordName(String discordName) {
-		this.discordName = discordName;
+	public void setDiscordTB(String discordTB) {
+		this.discordTB = new SimpleStringProperty(discordTB);
 	}
 
 	public String toString() {
-		return fName + ", " + lName + ", " + discordName;
+		return firstNameTB.get();
+	}
+
+	public String toDataString() {
+		return "'" + firstNameTB.get() + "','" + lastNameTB.get() + "','" + discordTB.get() + "'";
 	}
 }
