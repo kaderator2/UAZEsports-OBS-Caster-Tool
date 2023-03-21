@@ -265,7 +265,70 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Button layoutX="113.0" layoutY="70.0" mnemonicParsing="false" text="Button" />
+                                    <GridPane gridLinesVisible="true" layoutX="115.0" layoutY="61.0" prefHeight="274.0" prefWidth="329.3333333333333" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="189.9999745686849" minHeight="10.0" prefHeight="189.9999745686849" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="177.00000254313153" minHeight="10.0" prefHeight="65.33335876464844" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <GridPane>
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="70.66668701171875" minHeight="10.0" prefHeight="43.33334732055664" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="124.33330535888672" minHeight="10.0" prefHeight="95.6666488647461" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="115.33331680297852" minHeight="10.0" prefHeight="46.333351135253906" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <GridPane GridPane.rowIndex="1">
+                                                  <columnConstraints>
+                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                  </columnConstraints>
+                                                  <rowConstraints>
+                                                    <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="75.33332443237305" vgrow="SOMETIMES" />
+                                                  </rowConstraints>
+                                                </GridPane>
+                                                <Label alignment="CENTER" text="Update Game Scores" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="21.0" />
+                                                   </font>
+                                                   <effect>
+                                                      <DropShadow radius="19.835" width="60.34" />
+                                                   </effect>
+                                                </Label>
+                                                <Button mnemonicParsing="false" text="Reset All" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                             </children>
+                                          </GridPane>
+                                          <GridPane GridPane.rowIndex="1">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints maxHeight="32.33331298828125" minHeight="10.0" prefHeight="26.99998664855957" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="39.00001335144043" minHeight="10.0" prefHeight="39.00001335144043" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label alignment="CENTER" text="Home Score" textFill="#e60505" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Button mnemonicParsing="false" text="+1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                <Button mnemonicParsing="false" text="+1" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                <Label alignment="CENTER" text="Away Score" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font size="20.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </GridPane>
                                  </children></AnchorPane>
                         </content>
                       </TitledPane>
