@@ -297,7 +297,7 @@
                                                       <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <CheckBox mnemonicParsing="false" prefWidth="178.0" text="Game Value Updates w/Score" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                                      <CheckBox fx:id="autoUpdateScore" mnemonicParsing="false" prefWidth="178.0" selected="true" text="Game Value Updates w/Score" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                                          <font>
                                                             <Font name="Segoe UI" size="12.0" />
                                                          </font>
@@ -312,7 +312,7 @@
                                                                   <Insets left="5.0" right="3.0" top="8.0" />
                                                                </padding>
                                                             </Label>
-                                                            <ChoiceBox prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
+                                                            <ChoiceBox fx:id="totalGamesBox" prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
                                                             <Label text="Current Game:">
                                                                <font>
                                                                   <Font name="Segoe UI" size="15.0" />
@@ -321,7 +321,7 @@
                                                                   <Insets left="3.0" right="3.0" top="8.0" />
                                                                </padding>
                                                             </Label>
-                                                            <ChoiceBox prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
+                                                            <ChoiceBox fx:id="currentGameBox" prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
                                                          </children>
                                                       </HBox>
                                                       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -334,7 +334,7 @@
                                                                   <Insets left="5.0" right="3.0" top="8.0" />
                                                                </padding>
                                                             </Label>
-                                                            <ChoiceBox prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
+                                                            <ChoiceBox fx:id="homeScoreBox" prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
                                                             <Label text="Away Score:">
                                                                <font>
                                                                   <Font name="Segoe UI" size="15.0" />
@@ -343,7 +343,7 @@
                                                                   <Insets left="3.0" right="3.0" top="8.0" />
                                                                </padding>
                                                             </Label>
-                                                            <ChoiceBox prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
+                                                            <ChoiceBox fx:id="awayScoreBox" prefHeight="25.0" prefWidth="46.0" translateY="5.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
@@ -356,12 +356,7 @@
                                                       <DropShadow radius="19.835" width="60.34" />
                                                    </effect>
                                                 </Label>
-                                                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                                   <children>
-                                                      <Button mnemonicParsing="false" text="Reset All" translateX="-10.0" />
-                                                      <Button mnemonicParsing="false" text="Undo" />
-                                                   </children>
-                                                </HBox>
+                                                <Button mnemonicParsing="false" onAction="#resetScoreSettings" text="Reset All" translateY="-3.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                              </children>
                                           </GridPane>
                                           <GridPane GridPane.rowIndex="1">
@@ -379,8 +374,8 @@
                                                       <Font size="20.0" />
                                                    </font>
                                                 </Label>
-                                                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="49.0" text="+1" translateY="-3.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                                                <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="49.0" text="+1" translateY="-3.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#increaseHomeScore" prefHeight="28.0" prefWidth="49.0" text="+1" translateY="-3.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                                                <Button mnemonicParsing="false" onAction="#increaseAwayScore" prefHeight="28.0" prefWidth="49.0" text="+1" translateY="-3.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                                                 <Label alignment="CENTER" text="Away Score:" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                                    <font>
                                                       <Font size="20.0" />

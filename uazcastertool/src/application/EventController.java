@@ -7,6 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +18,7 @@ import javafx.fxml.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -24,6 +29,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class EventController {
 	private BufferedWriter writeCasterDB;
 	private ObservableList<Caster> casterList = FXCollections.observableArrayList();
+	private final int MAX_GAMES = 8;
+	private int totalGames = 6;
+	private int currentGame = 1;
+	private int homeScore = 0;
+	private int awayScore = 0;
 	@FXML
 	private Label errorText;
 	@FXML
@@ -50,15 +60,80 @@ public class EventController {
 	private ChoiceBox leftCasterDD;
 	@FXML
 	private ChoiceBox rightCasterDD;
+	@FXML
+	protected ChoiceBox<String> totalGamesBox;
+	@FXML
+	protected ChoiceBox<String> currentGameBox;
+	@FXML
+	protected ChoiceBox<String> homeScoreBox;
+	@FXML
+	protected ChoiceBox<String> awayScoreBox;
+	@FXML
+	private CheckBox autoUpdateScore;
 
 	@FXML
 	public void initialize() {
 		populateCasterList();
-	}
+		initScoreSettings();
+		totalGamesBox.getSelectionModel().selectedIndexProperty()
+				.addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+					@Override
+					public void changed(ObservableValue<? extends Number> observableValue, Number number,
+							Number number2) {
+						try {
+							totalGames = Integer.parseInt(totalGamesBox.getItems().get((Integer) number2));
+							currentGameBox.getSelectionModel().clearSelection();
+							currentGameBox.getItems().clear();
+							for (int i = 0; i < totalGames; i++) {
+								currentGameBox.getItems().add(String.valueOf(i + 1));
+							}
+							currentGameBox.getSelectionModel().select(0);
+							writeDataToFile("games.txt", getGameStr());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+		currentGameBox.getSelectionModel().selectedIndexProperty()
+				.addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+					@Override
+					public void changed(ObservableValue<? extends Number> observableValue, Number number,
+							Number number2) {
+						try {
+							currentGame = Integer.parseInt(currentGameBox.getItems().get((Integer) number2));
+							writeDataToFile("games.txt", getGameStr());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+		homeScoreBox.getSelectionModel().selectedIndexProperty()
+				.addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+					@Override
+					public void changed(ObservableValue<? extends Number> observableValue, Number number,
+							Number number2) {
+						try {
+							homeScore = Integer.parseInt(homeScoreBox.getItems().get((Integer) number2));
+							writeDataToFile("score.txt", getScoreStr());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+		awayScoreBox.getSelectionModel().selectedIndexProperty()
+				.addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+					@Override
+					public void changed(ObservableValue<? extends Number> observableValue, Number number,
+							Number number2) {
+						try {
+							awayScore = Integer.parseInt(awayScoreBox.getItems().get((Integer) number2));
+							writeDataToFile("score.txt", getScoreStr());
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
 
-	@FXML
-	protected void quit(ActionEvent event) {
-		System.exit(0);
+					}
+				});
 	}
 
 	@FXML
@@ -94,15 +169,8 @@ public class EventController {
 		populateCasterList();
 	}
 
-	private void resetCasterFile() {
-		File cFile = new File("casterDatabase.csv");
-		cFile.delete();
-		Main.initCasterFile();
-	}
-
 	@FXML
 	protected void addNewCaster(ActionEvent event) {
-		// TODO Fix me
 		successText.setVisible(false);
 		errorText.setVisible(false);
 		try {
@@ -117,14 +185,12 @@ public class EventController {
 			}
 			Caster newCaster = new Caster(firstName, lastName, discordUser);
 			writeCaster(newCaster);
-			// System.out.println(firstName + lastName + discordUser);
 			populateCasterList();
 			successText.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			errorText.setVisible(true);
 		}
-
 	}
 
 	@FXML
@@ -136,11 +202,71 @@ public class EventController {
 			try {
 				writeCaster(caster);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		populateCasterList();
+	}
+
+	@FXML
+	protected void resetScoreSettings(ActionEvent event) {
+		initScoreSettings();
+	}
+
+	@FXML
+	protected void increaseHomeScore(ActionEvent event) {
+		homeScore += 1;
+		homeScoreBox.getSelectionModel().select(homeScore);
+		if (autoUpdateScore.isSelected()) {
+			currentGame += 1;
+			currentGameBox.getSelectionModel().select(currentGame - 1);
+		}
+	}
+
+	@FXML
+	protected void increaseAwayScore(ActionEvent event) {
+		awayScore += 1;
+		awayScoreBox.getSelectionModel().select(awayScore);
+		if (autoUpdateScore.isSelected()) {
+			currentGame += 1;
+			currentGameBox.getSelectionModel().select(currentGame - 1);
+		}
+	}
+
+	@FXML
+	protected void quit(ActionEvent event) {
+		System.exit(0);
+	}
+
+	// ~~~~~~~~~~~ END OF FXML FUNCTIONS ~~~~~~~~~~~
+
+	private void resetCasterFile() {
+		File cFile = new File("casterDatabase.csv");
+		cFile.delete();
+		Main.initCasterFile();
+	}
+
+	private void initScoreSettings() {
+		totalGamesBox.getItems().clear();
+		currentGameBox.getItems().clear();
+		homeScoreBox.getItems().clear();
+		awayScoreBox.getItems().clear();
+		String[] temp = new String[MAX_GAMES];
+		for (int i = 0; i < MAX_GAMES; i++) {
+			temp[i] = String.valueOf(i + 1);
+		}
+		totalGamesBox.getItems().addAll(temp);
+		totalGamesBox.getSelectionModel().select(temp.length - 1);
+		if (currentGameBox.getItems().isEmpty()) {
+			currentGameBox.getItems().addAll(temp);
+			currentGameBox.getSelectionModel().select(0);
+		}
+		homeScoreBox.getItems().add("0");
+		awayScoreBox.getItems().add("0");
+		homeScoreBox.getItems().addAll(temp);
+		awayScoreBox.getItems().addAll(temp);
+		homeScoreBox.getSelectionModel().select(0);
+		awayScoreBox.getSelectionModel().select(0);
 	}
 
 	private void populateCasterList() {
@@ -181,12 +307,16 @@ public class EventController {
 	}
 
 	private void writeDataToFile(String fname, String data) throws FileNotFoundException {
-		// System.out.println("Cant find caster db file... Creating a new one!");
 		PrintWriter newFilePW = new PrintWriter(fname);
 		newFilePW.print(data);
 		newFilePW.close();
-		// TODO Auto-generated catch block
-		// System.out.println("Cant make new file, quitting...");
+	}
 
+	private String getGameStr() {
+		return "GAME " + currentGame + "/" + totalGames;
+	}
+
+	private String getScoreStr() {
+		return homeScore + " - " + awayScore;
 	}
 }
