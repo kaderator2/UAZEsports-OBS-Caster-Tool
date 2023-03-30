@@ -1,35 +1,36 @@
 package com.example.uazesportsobscastertool;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.control.Alert;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class EventController {
+    private final int MAX_GAMES = 8;
+    @FXML
+    public TableColumn<Caster, String> discordTB;
+    @FXML
+    public TableColumn<Caster, String> firstNameTB;
+    @FXML
+    public TableColumn<Caster, String> lastNameTB;
+    @FXML
+    protected ChoiceBox<String> totalGamesBox;
+    @FXML
+    protected ChoiceBox<String> currentGameBox;
+    @FXML
+    protected ChoiceBox<String> homeScoreBox;
+    @FXML
+    protected ChoiceBox<String> awayScoreBox;
     private BufferedWriter writeCasterDB;
     private ObservableList<Caster> casterList = FXCollections.observableArrayList();
-    private final int MAX_GAMES = 8;
     private int totalGames = 6;
     private int currentGame = 1;
     private int homeScore = 0;
@@ -51,23 +52,9 @@ public class EventController {
     @FXML
     private TableView<Caster> tbData;
     @FXML
-    public TableColumn<Caster, String> discordTB;
-    @FXML
-    public TableColumn<Caster, String> firstNameTB;
-    @FXML
-    public TableColumn<Caster, String> lastNameTB;
-    @FXML
     private ChoiceBox leftCasterDD;
     @FXML
     private ChoiceBox rightCasterDD;
-    @FXML
-    protected ChoiceBox<String> totalGamesBox;
-    @FXML
-    protected ChoiceBox<String> currentGameBox;
-    @FXML
-    protected ChoiceBox<String> homeScoreBox;
-    @FXML
-    protected ChoiceBox<String> awayScoreBox;
     @FXML
     private CheckBox autoUpdateScore;
 
@@ -76,7 +63,7 @@ public class EventController {
         populateCasterList();
         initScoreSettings();
         totalGamesBox.getSelectionModel().selectedIndexProperty()
-                .addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+                .addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number,
                                         Number number2) {
@@ -95,7 +82,7 @@ public class EventController {
                     }
                 });
         currentGameBox.getSelectionModel().selectedIndexProperty()
-                .addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+                .addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number,
                                         Number number2) {
@@ -108,7 +95,7 @@ public class EventController {
                     }
                 });
         homeScoreBox.getSelectionModel().selectedIndexProperty()
-                .addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+                .addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number,
                                         Number number2) {
@@ -121,7 +108,7 @@ public class EventController {
                     }
                 });
         awayScoreBox.getSelectionModel().selectedIndexProperty()
-                .addListener((ChangeListener<? super Number>) new ChangeListener<Number>() {
+                .addListener(new ChangeListener<Number>() {
                     @Override
                     public void changed(ObservableValue<? extends Number> observableValue, Number number,
                                         Number number2) {
@@ -289,7 +276,7 @@ public class EventController {
         while (casterFile.hasNextLine()) {
             String line = casterFile.nextLine();
             String[] splitLine = line.split(",");
-            boolean commentedLine = line.substring(0, 1).equals("#");
+            boolean commentedLine = line.charAt(0) == '#';
             if (!commentedLine) {
                 Caster newCaster = new Caster(splitLine[0].replace("'", ""), splitLine[1].replace("'", ""),
                         splitLine[2].replace("'", ""));
