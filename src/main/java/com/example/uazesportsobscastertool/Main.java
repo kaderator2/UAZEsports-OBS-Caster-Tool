@@ -20,14 +20,11 @@ public class Main extends Application {
             Scanner casterDB = new Scanner(new File("casterDatabase.csv"));
             casterDB.close();
         } catch (Exception e) {
-            // System.out.println("Cant find caster db file... Creating a new one!");
             try {
                 PrintWriter initCasterDB = new PrintWriter("casterDatabase.csv");
                 initCasterDB.print("#Caster First Name, Caster Last Name, Caster Discord");
                 initCasterDB.close();
             } catch (FileNotFoundException e1) {
-                // TODO Auto-generated catch block
-                // System.out.println("Cant make new file, quitting...");
                 System.exit(0);
             }
         }

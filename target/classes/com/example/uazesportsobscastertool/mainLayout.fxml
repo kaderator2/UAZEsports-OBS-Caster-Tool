@@ -68,15 +68,6 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New" />
-                        <MenuItem mnemonicParsing="false" text="Open…" />
-                        <Menu mnemonicParsing="false" text="Open Recent" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Close" />
-                        <MenuItem mnemonicParsing="false" text="Save" />
-                        <MenuItem mnemonicParsing="false" text="Save As…" />
-                        <MenuItem mnemonicParsing="false" text="Revert" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#clearCasterDB" text="Clear Caster DB..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit" />
@@ -84,7 +75,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                        <MenuItem mnemonicParsing="false" text="Contact Kade" />
                     </items>
                 </Menu>
             </menus>
@@ -261,7 +252,8 @@
                                                         </Label>
                                                     </children>
                                                 </GridPane>
-                                            </children></AnchorPane>
+                                            </children>
+                                        </AnchorPane>
                                     </content>
                                 </TitledPane>
                                 <TitledPane animated="false" text="Scores">
@@ -385,7 +377,8 @@
                                                         </GridPane>
                                                     </children>
                                                 </GridPane>
-                                            </children></AnchorPane>
+                                            </children>
+                                        </AnchorPane>
                                     </content>
                                 </TitledPane>
                                 <TitledPane animated="false" text="Misc">
