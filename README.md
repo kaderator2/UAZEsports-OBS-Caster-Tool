@@ -1,5 +1,5 @@
 # UAZEsports-OBS-Caster-Tool
-WIP JavaFX Based Caster tool for adding and hotswapping caster names from a customizable database
+JavaFX Based Caster tool for adding and hotswapping caster names from a customizable database
 ![alt text](https://imgur.com/Ya8pHRN.png)
 ![alt text](https://i.imgur.com/yFvSrde.png)
 ![alt text](https://imgur.com/h5YUfJM.png)
