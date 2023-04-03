@@ -1,10 +1,13 @@
 package com.example.uazesportsobscastertool;
 
 import javafx.beans.property.SimpleStringProperty;
-
+@Root
 public class Caster {
+    @Element
     private SimpleStringProperty lastNameTB;
+    @Attribute(required=true)
     private SimpleStringProperty firstNameTB;
+    @Element
     private SimpleStringProperty discordTB;
 
     public Caster(String firstNameTB, String lastNameTB, String discordTB) {
