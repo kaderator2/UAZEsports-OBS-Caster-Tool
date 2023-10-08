@@ -52,11 +52,15 @@ public class Main extends Application {
     }
 
     public static void initializeCasterFile() {
+        File theDir = new File("casterToolData");
+        if (!theDir.exists()){
+            theDir.mkdirs();
+        }
         // Attempts to open the caster database file. Creates a new one if it does not exist.
-        try (Scanner casterDatabaseScanner = new Scanner(new File("casterDatabase.csv"))) {
+        try (Scanner casterDatabaseScanner = new Scanner(new File("casterToolData/casterDatabase.csv"))) {
             // No need to do anything if the file exists.
         } catch (FileNotFoundException e) {
-            try (PrintWriter initCasterDatabaseWriter = new PrintWriter("casterDatabase.csv")) {
+            try (PrintWriter initCasterDatabaseWriter = new PrintWriter("casterToolData/casterDatabase.csv")) {
                 initCasterDatabaseWriter.print("#Caster First Name, Caster Last Name, Caster Discord");
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();

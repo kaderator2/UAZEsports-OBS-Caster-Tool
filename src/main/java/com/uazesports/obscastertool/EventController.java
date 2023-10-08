@@ -9,13 +9,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 import java.util.Scanner;
 
-public class EventController {
-    private final int MAX_GAMES = 8;
+public class EventController extends Window {
     @FXML
     public TableColumn<Caster, String> discordTableColumn;
     @FXML
@@ -30,15 +34,19 @@ public class EventController {
     protected ChoiceBox<String> homeScoreChoiceBox;
     @FXML
     protected ChoiceBox<String> awayScoreChoiceBox;
-    private BufferedWriter writeCasterDB;
     private ObservableList<Caster> casterList = FXCollections.observableArrayList();
     private int totalGames = 6;
     private int currentGame = 1;
     private int homeScore = 0;
     private int awayScore = 0;
+    private int maxGames = 8;
 
     @FXML
     private Label swappingSuccessText;
+    @FXML
+    private Button homeLogoButton;
+    @FXML
+    private Button awayLogoButton;
     @FXML
     private Label successText;
     @FXML
@@ -55,47 +63,37 @@ public class EventController {
     private ChoiceBox rightCasterDD;
     @FXML
     private CheckBox autoUpdateScore;
-
     @FXML
     private TextField homeTeamName;
     @FXML
     private TextField awayTeamName;
     @FXML
-    private TextField homeTeamColor;
+    private ColorPicker homeTeamColor;
     @FXML
-    private TextField awayTeamColor;
+    private ColorPicker awayTeamColor;
 
     @FXML
     public void initialize() {
         populateCasterList();
         initScoreSettings();
-        handleChoiceBoxSelection(totalGamesChoiceBox, "games.txt");
-        handleChoiceBoxSelection(currentGameChoiceBox, "games.txt");
-        handleChoiceBoxSelection(homeScoreChoiceBox, "score.txt");
-        handleChoiceBoxSelection(awayScoreChoiceBox, "score.txt");
+        handleChoiceBoxSelection(totalGamesChoiceBox, "casterToolData/games.txt");
+        handleChoiceBoxSelection(currentGameChoiceBox, "casterToolData/games.txt");
+        handleChoiceBoxSelection(homeScoreChoiceBox, "casterToolData/score.txt");
+        handleChoiceBoxSelection(awayScoreChoiceBox, "casterToolData/score.txt");
     }
 
     @FXML
     protected void updateTeamInfo(ActionEvent event) {
         String homeName = homeTeamName.getText();
         String awayName = awayTeamName.getText();
-        String homeColor = homeTeamColor.getText();
-        String awayColor = awayTeamColor.getText();
-        boolean invalidHexColorStart = (homeColor.isEmpty() || awayColor.isEmpty() ||
-                (homeColor.charAt(0) != '#' || awayColor.charAt(0) != '#'));
-        boolean invalidHexColorLength = (homeColor.length() != 7) || (awayColor.length() != 7);
-
-        if (invalidHexColorStart || invalidHexColorLength) {
-            showErrorMessage("Invalid Hex Color Codes! Please use the format #RRGGBB.");
-        } else {
-            // Valid hex color codes, proceed with updating team information
-            String teamInfo = homeName + "\n" + awayName + "\n" + homeColor + "\n" + awayColor;
-            try {
-                writeDataToFile("TeamInfo.txt", teamInfo);
-            }
-            catch (Exception e) {
-                showErrorMessage("Error updating Team Info!");
-            }
+        String homeColor = homeTeamColor.getValue().toString();
+        String awayColor = awayTeamColor.getValue().toString();
+        String teamInfo = homeName + "\n" + awayName + "\n" + homeColor + "\n" + awayColor;
+        try {
+            writeDataToFile("casterToolData/teamInfo.txt", teamInfo);
+        }
+        catch (Exception e) {
+            showErrorMessage("Error updating Team Info!");
         }
     }
 
@@ -106,15 +104,57 @@ public class EventController {
             Caster leftCaster = (Caster) leftCasterDD.getSelectionModel().getSelectedItem();
             Caster rightCaster = (Caster) rightCasterDD.getSelectionModel().getSelectedItem();
 
-            writeDataToFile("LCFN.txt", leftCaster.getFirstNameTB());
-            writeDataToFile("LCLN.txt", leftCaster.getLastNameTB());
-            writeDataToFile("RCFN.txt", rightCaster.getFirstNameTB());
-            writeDataToFile("RCLN.txt", rightCaster.getLastNameTB());
-            writeDataToFile("RCD.txt", rightCaster.getDiscordTB());
-            writeDataToFile("LCD.txt", leftCaster.getDiscordTB());
+            writeDataToFile("casterToolData/LCFN.txt", leftCaster.getFirstNameTB());
+            writeDataToFile("casterToolData/LCLN.txt", leftCaster.getLastNameTB());
+            writeDataToFile("casterToolData/RCFN.txt", rightCaster.getFirstNameTB());
+            writeDataToFile("casterToolData/RCLN.txt", rightCaster.getLastNameTB());
+            writeDataToFile("casterToolData/RCD.txt", rightCaster.getDiscordTB());
+            writeDataToFile("casterToolData/LCD.txt", leftCaster.getDiscordTB());
             swappingSuccessText.setVisible(true);
         } catch (Exception e) {
             showErrorMessage("Error swapping casters!");
+        }
+    }
+
+    @FXML
+    protected void setLogo(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter
+                = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+        fileChooser.getExtensionFilters().add(imageFilter);
+
+        try {
+            fileChooser.setTitle("Open Image File");
+            fileChooser.setInitialDirectory(
+                    new File(System.getProperty("user.home"))
+            );
+            File logoFile = fileChooser.showOpenDialog(this);
+
+            if (logoFile != null) {
+                String buttonLabel;
+                String targetFileName;
+
+                if (event.getSource() == homeLogoButton) {
+                    buttonLabel = "homeLogoButton";
+                    targetFileName = "homeLogo.png";
+                } else if (event.getSource() == awayLogoButton) {
+                    buttonLabel = "awayLogoButton";
+                    targetFileName = "awayLogo.png";
+                } else {
+                    return; // Unknown event source, do nothing
+                }
+
+                // Set button label
+                ((Button) event.getSource()).setText(logoFile.getName());
+
+                // Write file path to casterToolData folder
+                writeDataToFile("casterToolData/" + buttonLabel + "Path.txt", logoFile.getAbsolutePath());
+
+                // Copy the selected logo to the target file
+                Files.copy(Paths.get(logoFile.getAbsolutePath()), Paths.get("casterToolData/" + targetFileName), StandardCopyOption.REPLACE_EXISTING);
+            }
+        } catch (Exception e) {
+            showErrorMessage("Error Loading file, please try again!");
         }
     }
 
@@ -221,7 +261,7 @@ public class EventController {
                 try {
                     if (number2.intValue() >= 0 && number2.intValue() < choiceBox.getItems().size()) {
                         int value = Integer.parseInt(choiceBox.getItems().get(number2.intValue()));
-                        if (fileName.equals("games.txt")) {
+                        if (fileName.equals("casterToolData/games.txt")) {
                             if (choiceBox == totalGamesChoiceBox) {
                                 totalGames = value;
                                 currentGameChoiceBox.getItems().clear();
@@ -237,14 +277,14 @@ public class EventController {
                             } else if (choiceBox == currentGameChoiceBox) {
                                 currentGame = value;
                             }
-                        } else if (fileName.equals("score.txt")) {
+                        } else if (fileName.equals("casterToolData/score.txt")) {
                             if (choiceBox == homeScoreChoiceBox) {
                                 homeScore = value;
                             } else if (choiceBox == awayScoreChoiceBox) {
                                 awayScore = value;
                             }
                         }
-                        writeDataToFile(fileName, (fileName.equals("games.txt")) ? getGameStr() : getScoreStr());
+                        writeDataToFile(fileName, (fileName.equals("casterToolData/games.txt")) ? getGameStr() : getScoreStr());
                     }
                 } catch (Exception e) {
                     showErrorMessage("Error Initializing choice boxes!");
@@ -256,7 +296,7 @@ public class EventController {
 
 
     private void resetCasterFile() {
-        File cFile = new File("casterDatabase.csv");
+        File cFile = new File("casterToolData/casterDatabase.csv");
         cFile.delete();
         Main.initializeCasterFile();
     }
@@ -266,8 +306,8 @@ public class EventController {
         currentGameChoiceBox.getItems().clear();
         homeScoreChoiceBox.getItems().clear();
         awayScoreChoiceBox.getItems().clear();
-        String[] temp = new String[MAX_GAMES];
-        for (int i = 0; i < MAX_GAMES; i++) {
+        String[] temp = new String[maxGames];
+        for (int i = 0; i < maxGames; i++) {
             temp[i] = String.valueOf(i + 1);
         }
         totalGamesChoiceBox.getItems().addAll(temp);
@@ -300,7 +340,7 @@ public class EventController {
     }
 
     private void loadCastersFromFile() throws java.io.IOException {
-        Scanner casterFile = new Scanner(new File("casterDatabase.csv"));
+        Scanner casterFile = new Scanner(new File("casterToolData/casterDatabase.csv"));
         casterList = FXCollections.observableArrayList();
         while (casterFile.hasNextLine()) {
             String line = casterFile.nextLine();
@@ -316,14 +356,14 @@ public class EventController {
     }
 
     private void writeCaster(Caster newCaster) throws java.io.IOException {
-        writeCasterDB = new BufferedWriter(new FileWriter("casterDatabase.csv", true));
+        BufferedWriter writeCasterDB = new BufferedWriter(new FileWriter("casterToolData/casterDatabase.csv", true));
         writeCasterDB.newLine();
         writeCasterDB.write(newCaster.toDataString());
         writeCasterDB.close();
     }
 
-    private void writeDataToFile(String fname, String data) throws FileNotFoundException {
-        PrintWriter newFilePW = new PrintWriter(fname);
+    private void writeDataToFile(String fileName, String data) throws FileNotFoundException {
+        PrintWriter newFilePW = new PrintWriter(fileName);
         newFilePW.print(data);
         newFilePW.close();
     }

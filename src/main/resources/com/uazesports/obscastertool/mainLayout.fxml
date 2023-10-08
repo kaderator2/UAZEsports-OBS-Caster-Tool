@@ -37,6 +37,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -220,8 +221,8 @@
                                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                     </columnConstraints>
                                                     <rowConstraints>
-                                                        <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                                                        <RowConstraints maxHeight="243.00000190734863" minHeight="10.0" prefHeight="209.0" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="26.999998092651367" vgrow="SOMETIMES" />
+                                                        <RowConstraints maxHeight="243.00000190734863" minHeight="10.0" prefHeight="228.00000190734863" vgrow="SOMETIMES" />
                                                     </rowConstraints>
                                                     <children>
                                                         <TableView fx:id="tbData" prefHeight="300.0" prefWidth="330.0" GridPane.rowIndex="1">
@@ -379,14 +380,14 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <GridPane gridLinesVisible="true" layoutX="11.0" layoutY="10.0" prefHeight="230.0" prefWidth="309.0">
+                                    <GridPane gridLinesVisible="true" layoutX="11.0" layoutY="10.0" prefHeight="253.0" prefWidth="309.0">
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="70.66668701171875" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="115.33331680297852" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="70.66668701171875" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="197.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="115.33331680297852" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
                                           <GridPane alignment="CENTER" GridPane.rowIndex="1">
@@ -396,11 +397,12 @@
                                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="186.0" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                              <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                                              <RowConstraints maxHeight="26.0" minHeight="3.0" prefHeight="12.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                                <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
                                                 <Label alignment="CENTER" contentDisplay="CENTER" text="Home Name:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -421,7 +423,7 @@
                                                    </padding>
                                                 </Label>
                                                 <TextField fx:id="awayTeamName" maxWidth="160.0" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Home Color:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Home Color:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                                    <font>
                                                       <Font name="Segoe UI" size="15.0" />
                                                    </font>
@@ -429,8 +431,7 @@
                                                       <Insets left="5.0" right="3.0" top="8.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="homeTeamColor" maxWidth="100.0" text="#8b0315" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
-                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Away Color:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Away Color:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                                    <font>
                                                       <Font name="Segoe UI" size="15.0" />
                                                    </font>
@@ -438,7 +439,30 @@
                                                       <Insets left="5.0" right="3.0" top="8.0" />
                                                    </padding>
                                                 </Label>
-                                                <TextField fx:id="awayTeamColor" maxWidth="100.0" promptText="#FFFFFFF" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" />
+                                                <ColorPicker fx:id="homeTeamColor" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                   <value>
+                                                      <Color red="0.545098066329956" green="0.0117647061124444" blue="0.08235294371843338" />
+                                                   </value>
+                                                </ColorPicker>
+                                                <ColorPicker fx:id="awayTeamColor" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Home Logo:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="15.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="5.0" right="3.0" top="8.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" text="Away Logo:" translateY="-4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                                                   <font>
+                                                      <Font name="Segoe UI" size="15.0" />
+                                                   </font>
+                                                   <padding>
+                                                      <Insets left="5.0" right="3.0" top="8.0" />
+                                                   </padding>
+                                                </Label>
+                                                <Button fx:id="homeLogoButton" mnemonicParsing="false" onAction="#setLogo" text="Choose file..." GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                                <Button fx:id="awayLogoButton" mnemonicParsing="false" onAction="#setLogo" text="Choose file..." GridPane.columnIndex="2" GridPane.rowIndex="5" />
                                              </children>
                                           </GridPane>
                                           <Label alignment="CENTER" text="Team Info" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -449,26 +473,13 @@
                                                 <DropShadow radius="19.835" width="60.34" />
                                              </effect>
                                           </Label>
-                                          <Button mnemonicParsing="false" onAction="#updateTeamInfo" text="Update" translateY="-3.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                          <Button mnemonicParsing="false" onAction="#updateTeamInfo" text="Update" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                        </children>
                                     </GridPane>
                                  </children>
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                                <TitledPane animated="false" text="Misc">
-                                    <content>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                            <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="51.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@drizzlerotatefinal.gif" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </AnchorPane>
-                                    </content>
-                                </TitledPane>
                             </panes>
                         </Accordion>
                     </children>
