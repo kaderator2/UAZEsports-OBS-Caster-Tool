@@ -1,5 +1,6 @@
 # UAZEsports-OBS-Caster-Tool
 JavaFX Based Caster tool for adding and hotswapping caster names
+
 Requires java 17.0.5
 
 from a customizable database along with managing game scoring
