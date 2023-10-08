@@ -3,6 +3,6 @@ module com.example.uazesportsobscastertool {
     requires javafx.fxml;
 
 
-    opens com.example.uazesportsobscastertool to javafx.fxml;
-    exports com.example.uazesportsobscastertool;
+    opens com.uazesports.obscastertool to javafx.fxml;
+    exports com.uazesports.obscastertool;
 }
